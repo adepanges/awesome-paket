@@ -22,7 +22,7 @@ export default class PackageController
     service: PackageService;
 
     @Get()
-    @(Returns(200, Array).Of(Package).ContentType("application/json"))
+    @Returns(200, Array).Of(Package).ContentType("application/json")
     async find(@QueryParams() query: any) {
         const { fields, skip, limit, sort } = this.getPagination(query);
         const filter = {};
@@ -30,13 +30,13 @@ export default class PackageController
     }
 
     @Post()
-    @(Returns(200, Package).ContentType("application/json"))
+    @Returns(200, Package).ContentType("application/json")
     async create(@BodyParams() payload: Package) {
         return await this.service.create(payload);
     }
 
     @Put("/:id")
-    @(Returns(200, Package).ContentType("application/json"))
+    @Returns(200, Package).ContentType("application/json")
     async updateById(
         @PathParams("id") id: ObjectID,
         @BodyParams() payload: Package
@@ -45,15 +45,15 @@ export default class PackageController
     }
 
     @Delete("/:id")
-    @(Returns(200, Package).ContentType("application/json"))
+    @Returns(200, Package).ContentType("application/json")
     async deleteById(@PathParams("id") id: ObjectID) {
         return await this.service.deleteById(id);
     }
 
     @Get("/:id")
-    @(Returns(200, Package).ContentType("application/json"))
+    @Returns(200, Package).ContentType("application/json")
     async findById(@PathParams("id") id: ObjectID, @QueryParams() query: any) {
         const { fields } = this.getPagination(query);
-        return await this.service.find(id, fields);
+        return await this.service.findById(id, fields);
     }
 }
