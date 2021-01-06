@@ -7,7 +7,6 @@ import { IWrite } from "../interfaces/services/IWrite";
 import { ObjectID } from "@tsed/mongoose";
 
 export default class Base implements IRead<Document>, IWrite<Document> {
-
     public _defaultSort = "_id";
     public _defaultLimit = 10;
     public model: any;
@@ -68,21 +67,28 @@ export default class Base implements IRead<Document>, IWrite<Document> {
     }
 
     findOne(conditions?: any, fields?: string, options?: any) {
+        conditions.is_deleted = false;
         return B.try(() =>
             this.model.findOne(conditions || {}, fields || "", options)
         )
-            .then((document) =>
-                this.transformer ? this.transformer([document]) : [document]
-            )
-            .then((documents) => documents && documents[0]);
+        .then((document) =>
+            this.transformer ? this.transformer([document]) : [document]
+        )
+        .then((documents) => documents && documents[0]);
     }
 
     findById(_id: ObjectID, fields?: string, options?: any) {
-        return B.try(() => this.model.findById(_id, fields || "", options))
-            .then((document) =>
-                this.transformer ? this.transformer([document]) : [document]
+        return B.try(() =>
+            this.findOne(
+                { _id, is_active: true, is_deleted: false },
+                fields || "",
+                options
             )
-            .then((documents) => documents && documents[0]);
+        )
+        .then((document) =>
+            this.transformer ? this.transformer([document]) : [document]
+        )
+        .then((documents) => documents && documents[0]);
     }
 
     create(document: any) {
