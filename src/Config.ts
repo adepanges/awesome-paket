@@ -39,7 +39,7 @@ if (fs.existsSync(envFile)) {
 
 export const SESSION_SECRET = process.env["SESSION_SECRET"];
 export const APP_URL = process.env["APP_URL"] || "http://localhost:4000";
-export const APP_PORT = process.env["APP_PORT"] || 4000;
+export const APP_PORT = process.env.PORT || process.env["APP_PORT"] || 4000;
 export const MONGODB_URI = process.env["MONGODB_URI"];
 export const WHITELIST_ORIGIN = ["http://localhost:3000", "https://batikgirialam.com"];
 export const DOMAIN = ENVIRONMENT_NAME == "DEV" ? "localhost" : "batikgirialam.com";
