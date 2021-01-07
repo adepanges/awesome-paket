@@ -1,4 +1,4 @@
-# awesome-paket
+![visitors](https://visitor-badge.glitch.me/badge?page_id=adepanges.awesome-paket)
 
 
 ### Install All Depencies
