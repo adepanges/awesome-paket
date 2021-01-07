@@ -1,15 +1,13 @@
 import { Env } from "@tsed/core";
 import { $log } from "@tsed/logger";
 import dotenv from "dotenv";
-const fs = require("fs");
+import fs from "fs";
 
 let envFile = ".env";
 let firebaseFile = "./firebase.config.json";
 let errorCount = 0;
 
 export const NODE_ENV = String(process.env.NODE_ENV);
-
-console.log("NODE_ENV", NODE_ENV);
 
 let ENVIRONMENT_NAME: "PROD" | "DEV" | "TEST";
 switch (NODE_ENV) {
@@ -35,6 +33,8 @@ if (fs.existsSync(envFile)) {
 } else if (fs.existsSync(".env")) {
     $log.info("Using \".env\" file to supply config Environment Variables");
     dotenv.config({ path: ".env" });
+} else {
+    dotenv.config();
 }
 
 export const SESSION_SECRET = process.env["SESSION_SECRET"];

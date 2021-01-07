@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import B from "bluebird"
+import B from "bluebird";
 import * as Sinon from "sinon";
 import { PlatformTest, Req } from "@tsed/common";
 import PackageService from "./Package";

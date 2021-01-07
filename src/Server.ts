@@ -128,5 +128,7 @@ export default class Server {
         return null;
     }
 
-    $afterRoutesInit(): void | Promise<any> {}
+    $afterRoutesInit(): void | Promise<any> {
+        // do anything
+    }
 }
